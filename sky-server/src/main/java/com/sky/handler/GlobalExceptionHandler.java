@@ -32,5 +32,4 @@ public class GlobalExceptionHandler {
         String msg = message.split(" ")[2] + "已存在";
         return Result.error(msg);
     }
-
 }
