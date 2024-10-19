@@ -73,25 +73,45 @@ public class EmployeeController {
     @PostMapping("/logout")
     @ApiOperation("员工退出")
     public Result<String> logout() {
+        log.info("员工退出");
         return Result.success();
     }
 
     /**
      * 新增员工
+     *
      * @param employeeDTO
      * @return
      */
     @PostMapping
     @ApiOperation("新增员工")
     public Result addEmployee(EmployeeDTO employeeDTO) {
+        log.info("新增员工: {}", employeeDTO);
         employeeService.addEmployee(employeeDTO);
         return Result.success();
     }
 
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
-    public Result<PageResult> pageQuery(EmployeePageQueryDTO employeePageQueryDTO){
+    public Result<PageResult> pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        log.info("员工分页查询: {}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 启用、禁用员工账号
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用、禁用员工账号")
+    public Result openOrCLose(@PathVariable Integer status, Long id) {
+        employeeService.openOrClose(status, id);
+        return Result.success();
     }
 }
