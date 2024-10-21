@@ -93,6 +93,7 @@ public class EmployeeController {
 
     /**
      * 员工分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
@@ -106,11 +107,13 @@ public class EmployeeController {
 
     /**
      * 启用、禁用员工账号
+     *
      * @return
      */
     @PostMapping("/status/{status}")
     @ApiOperation("启用、禁用员工账号")
     public Result openOrCLose(@PathVariable Integer status, Long id) {
+        log.info("启用、禁用员工账号: {}, {}", status, id);
         employeeService.openOrClose(status, id);
         return Result.success();
     }
